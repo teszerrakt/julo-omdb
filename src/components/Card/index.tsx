@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { SearchItem } from '../../types'
 import { capitalize } from '../../utils'
 import { cssCard, cssCardDetailContainer, cssImgContainer } from './style'
+import Image from '../../components/Image'
 
 const Card = ({ Poster, Type, Year, Title, imdbID }: SearchItem) => {
   const navigate = useNavigate()
@@ -14,7 +15,7 @@ const Card = ({ Poster, Type, Year, Title, imdbID }: SearchItem) => {
   return (
     <div css={cssCard} onClick={handleClick}>
       <div css={cssImgContainer}>
-        <img src={Poster} alt={`${Title} poster`} />
+        <Image src={Poster} alt={`${Title} poster`} />
       </div>
       <div css={cssCardDetailContainer}>
         <h2>{Title}</h2>

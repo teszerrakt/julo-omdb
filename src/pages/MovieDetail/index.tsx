@@ -1,6 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { useNavigate, useParams } from 'react-router-dom'
 import { BASE_URL } from '../../api'
+import Image from '../../components/Image'
 import { Skeleton } from '../../components/Skeleton'
 import { useAxios } from '../../hooks/useAxios'
 import useLocalStorage, { LS_KEY } from '../../hooks/useLocalStorage'
@@ -110,7 +111,7 @@ const MovieDetail = () => {
       </header>
       <div css={cssContentContainer}>
         <div css={cssImgContainer}>
-          <img src={Poster} alt={`${Title} poster`} />
+          <Image src={Poster} alt={`${Title} poster`} />
           <span css={cssRating}>★ {imdbRating}</span>
           <button
             css={cssCollectionBtn(isInCollection)}

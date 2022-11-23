@@ -16,7 +16,7 @@ import { skeletonList } from '../../constant'
 import { BASE_URL } from '../../api'
 
 const MovieList = () => {
-  const [query, setQuery] = useState('Narnia')
+  const [query, setQuery] = useState('Avengers')
   const debouncedQuery = useDebounce(query)
   const { data, error, loading, refetch } = useAxios<SearchResponse>()
   const [currentPage, setCurrentPage] = useState(1)
