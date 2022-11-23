@@ -13,6 +13,7 @@ import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
 import CardSkeleton from '../../components/Card/CardSkeleton'
 import { skeletonList } from '../../constant'
+import { BASE_URL } from '../../api'
 
 const MovieList = () => {
   const [query, setQuery] = useState('Narnia')
@@ -25,8 +26,7 @@ const MovieList = () => {
   useEffect(() => {
     refetch({
       method: 'GET',
-      // TODO: use .env to store apikey
-      url: `http://www.omdbapi.com/?s=${debouncedQuery}&apikey=d314b6b5&page=${currentPage}`,
+      url: `${BASE_URL}&s=${debouncedQuery}&page=${currentPage}`,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedQuery, currentPage])

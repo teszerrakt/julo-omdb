@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useNavigate, useParams } from 'react-router-dom'
+import { BASE_URL } from '../../api'
 import { Skeleton } from '../../components/Skeleton'
 import { useAxios } from '../../hooks/useAxios'
 import useLocalStorage, { LS_KEY } from '../../hooks/useLocalStorage'
@@ -22,8 +23,7 @@ const MovieDetail = () => {
   const { id } = useParams<{ id: string }>()
   const { data, error, loading } = useAxios<MovieDetailResponse>({
     method: 'GET',
-    // TODO: use .env to store apikey
-    url: `http://www.omdbapi.com/?i=${id}&apikey=d314b6b5`,
+    url: `${BASE_URL}&i=${id}`,
   })
   const [collections, setCollections] = useLocalStorage<Collections>(
     LS_KEY.COLLECTIONS,
