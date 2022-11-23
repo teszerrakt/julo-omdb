@@ -45,11 +45,11 @@ const Pagination = ({
   return (
     <div css={cssPaginationContainer}>
       <button onClick={handlePrev} disabled={isPrevDisabled}>
-        Prev
+        ◀︎ Prev
       </button>
       {currentPage}
       <button onClick={handleNext} disabled={isNextDisabled}>
-        Next
+        Next ▶︎
       </button>
     </div>
   )

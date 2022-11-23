@@ -44,3 +44,7 @@ export interface MovieDetailResponse {
   Website: string
   Response: string
 }
+
+export interface Collections {
+  [movieId: string]: MovieDetailResponse
+}

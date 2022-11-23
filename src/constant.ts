@@ -3,6 +3,8 @@ export const COLOR = {
   blue: '#4C87EA',
   gray: '#4A576D',
   grayBlue: '#203051',
+  red: '#F5222D',
+  darkRed: '#A8071A',
 }
 
 const breakpoints = [576, 768, 992, 1200, 1800]

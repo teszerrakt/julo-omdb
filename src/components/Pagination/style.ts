@@ -8,6 +8,7 @@ export const cssPaginationContainer = css({
   fontWeight: 800,
   gap: 16,
   button: {
+    fontWeight: 800,
     backgroundColor: COLOR.blue,
     color: 'white',
     borderRadius: 100,
@@ -18,6 +19,7 @@ export const cssPaginationContainer = css({
       backgroundColor: COLOR.grayBlue,
     },
     '&:disabled': {
+      color: COLOR.darkBlue,
       backgroundColor: COLOR.gray,
       cursor: 'not-allowed',
     },
