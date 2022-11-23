@@ -13,10 +13,6 @@ const Pagination = ({ totalData }: IPaginationProps) => {
   const isPrevDisabled = count <= 0 || currentPage === 1
   const isNextDisabled = count >= totalData
 
-  useEffect(() => {
-    console.log('count', count)
-  })
-
   return (
     <div css={cssPaginationContainer}>
       <button onClick={handlePrev} disabled={isPrevDisabled}>
