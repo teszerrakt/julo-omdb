@@ -1,46 +1,21 @@
 /** @jsxImportSource @emotion/react */
-import { useEffect, useState } from 'react'
+import { useContext, useEffect } from 'react'
+import { PaginationContext } from '../../context/PaginationContext'
 import { cssPaginationContainer } from './style'
 
 interface IPaginationProps {
-  currentPage: number
   totalData: number
-  onNext: () => void
-  onPrev: () => void
 }
 
-const DEFAULT_DATA_PER_PAGE = 10
-
-const Pagination = ({
-  currentPage,
-  onNext,
-  onPrev,
-  totalData,
-}: IPaginationProps) => {
-  // TODO: save the count to context or create usePagination hooks
-  const [count, setCount] = useState(DEFAULT_DATA_PER_PAGE)
+const Pagination = ({ totalData }: IPaginationProps) => {
+  const { currentPage, count, handleNext, handlePrev } =
+    useContext(PaginationContext)
   const isPrevDisabled = count <= 0 || currentPage === 1
   const isNextDisabled = count >= totalData
 
   useEffect(() => {
     console.log('count', count)
   })
-
-  const handlePrev = () => {
-    setCount((value) => value - DEFAULT_DATA_PER_PAGE)
-    scrollToTop()
-    onPrev()
-  }
-
-  const handleNext = () => {
-    setCount((value) => value + DEFAULT_DATA_PER_PAGE)
-    scrollToTop()
-    onNext()
-  }
-
-  const scrollToTop = () => {
-    window.scrollTo(0, 0)
-  }
 
   return (
     <div css={cssPaginationContainer}>

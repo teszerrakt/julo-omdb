@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { ChangeEvent, useEffect, useState } from 'react'
+import { ChangeEvent, useContext, useEffect, useState } from 'react'
 import { SearchResponse } from '../../types'
 import {
   cssMovieListContainer,
@@ -14,12 +14,15 @@ import Pagination from '../../components/Pagination'
 import CardSkeleton from '../../components/Card/CardSkeleton'
 import { skeletonList } from '../../constant'
 import { BASE_URL } from '../../api'
+import PaginationProvider, {
+  PaginationContext,
+} from '../../context/PaginationContext'
 
 const MovieList = () => {
   const [query, setQuery] = useState('Avengers')
   const debouncedQuery = useDebounce(query)
   const { data, error, loading, refetch } = useAxios<SearchResponse>()
-  const [currentPage, setCurrentPage] = useState(1)
+  const { currentPage, resetPagination } = useContext(PaginationContext)
 
   const movieList = data?.Search ?? []
 
@@ -32,7 +35,7 @@ const MovieList = () => {
   }, [debouncedQuery, currentPage])
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCurrentPage(1)
+    resetPagination()
     setQuery(event.target.value)
   }
 
@@ -62,12 +65,7 @@ const MovieList = () => {
             <Card key={movie.imdbID} {...movie} />
           ))}
         </div>
-        <Pagination
-          currentPage={currentPage}
-          onNext={() => setCurrentPage(currentPage + 1)}
-          onPrev={() => setCurrentPage(currentPage - 1)}
-          totalData={parseInt(data?.totalResults ?? '0')}
-        />
+        <Pagination totalData={parseInt(data?.totalResults ?? '0')} />
       </>
     )
   }
@@ -83,4 +81,12 @@ const MovieList = () => {
   )
 }
 
-export default MovieList
+const MovieListWrapper = () => {
+  return (
+    <PaginationProvider>
+      <MovieList />
+    </PaginationProvider>
+  )
+}
+
+export default MovieListWrapper
