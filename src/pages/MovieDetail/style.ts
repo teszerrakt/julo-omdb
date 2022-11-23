@@ -15,6 +15,7 @@ export const cssMovieDetailContainer = css({
 
 export const cssHeader = css({
   display: 'flex',
+  alignItems: 'center',
   gap: 16,
   width: '`calc(100% - 2 * 32px)`',
   marginBottom: 32,
@@ -28,7 +29,10 @@ export const cssHeader = css({
   },
   button: {
     borderRadius: '100%',
-    padding: '2px 10px',
+    minHeight: 40,
+    minWidth: 40,
+    maxHeight: 40,
+    maxWidth: 40,
     color: COLOR.grayBlue,
     border: 'none',
     cursor: 'pointer',

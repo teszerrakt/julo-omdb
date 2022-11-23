@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { useNavigate, useParams } from 'react-router-dom'
+import { Skeleton } from '../../components/Skeleton'
 import { useAxios } from '../../hooks/useAxios'
 import useLocalStorage, { LS_KEY } from '../../hooks/useLocalStorage'
 import { Collections, MovieDetailResponse } from '../../types'
@@ -29,14 +30,6 @@ const MovieDetail = () => {
     {}
   )
 
-  if (loading) return <div>Loading ...</div>
-
-  if (error || !data) return <div>{error || 'Some Error Happenend'}</div>
-
-  const isInCollection = Boolean(collections[id!])
-
-  const { Title, Plot, Poster, imdbRating } = data
-
   const detailKeys: Partial<keyof MovieDetailResponse>[] = [
     'Type',
     'Year',
@@ -48,8 +41,54 @@ const MovieDetail = () => {
   ]
 
   const handleClickBack = () => {
-    navigate('/')
+    navigate(-1)
   }
+
+  if (loading) {
+    return (
+      <div css={cssMovieDetailContainer}>
+        <header css={cssHeader}>
+          <button onClick={handleClickBack}>◀︎</button>
+          <Skeleton height={24} width="50%" />
+        </header>
+        <div css={cssContentContainer}>
+          <div css={cssImgContainer}>
+            <Skeleton height="85vh" />
+            <Skeleton height={48.5} />
+          </div>
+          <div css={cssDetailCardContainer}>
+            <div css={cssDetailCard}>
+              <h3>
+                <Skeleton width="45%" />
+              </h3>
+              <div>
+                {detailKeys.map((key) => (
+                  <div css={cssDetailContent} key={key}>
+                    <Skeleton width="75%" />
+                    <Skeleton />
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div css={cssDetailCard}>
+              <h3>
+                <Skeleton width="45%" />
+              </h3>
+              <Skeleton />
+              <Skeleton />
+              <Skeleton width="45%" />
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (error || !data) return <div>{error || 'Some Error Happenend'}</div>
+
+  const isInCollection = Boolean(collections[id!])
+
+  const { Title, Plot, Poster, imdbRating } = data
 
   const handleAddToCollections = () => {
     setCollections((prevState) => ({ ...prevState, [id!]: data }))

@@ -11,6 +11,8 @@ import useDebounce from '../../hooks/useDebounce'
 import { useAxios } from '../../hooks/useAxios'
 import Card from '../../components/Card'
 import Pagination from '../../components/Pagination'
+import CardSkeleton from '../../components/Card/CardSkeleton'
+import { skeletonList } from '../../constant'
 
 const MovieList = () => {
   const [query, setQuery] = useState('Narnia')
@@ -26,6 +28,7 @@ const MovieList = () => {
       // TODO: use .env to store apikey
       url: `http://www.omdbapi.com/?s=${debouncedQuery}&apikey=d314b6b5&page=${currentPage}`,
     })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedQuery, currentPage])
 
   const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -35,7 +38,13 @@ const MovieList = () => {
 
   const renderContent = () => {
     if (loading) {
-      return <div>Loading ...</div>
+      return (
+        <div css={cssMovieListContainer}>
+          {skeletonList().map((key) => (
+            <CardSkeleton key={key} />
+          ))}
+        </div>
+      )
     }
 
     if (movieList.length === 0) {
@@ -50,8 +59,7 @@ const MovieList = () => {
       <>
         <div css={cssMovieListContainer}>
           {movieList.map((movie) => (
-            // set isLoading according to fetch
-            <Card key={movie.imdbID} isLoading={false} {...movie} />
+            <Card key={movie.imdbID} {...movie} />
           ))}
         </div>
         <Pagination

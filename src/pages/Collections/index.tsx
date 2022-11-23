@@ -15,8 +15,7 @@ const CollectionsPage = () => {
     <div css={cssCollectionsPage}>
       <div css={cssMovieListContainer}>
         {movieList.map((movie) => (
-          // set isLoading according to fetch
-          <Card key={movie.imdbID} isLoading={false} {...movie} />
+          <Card key={movie.imdbID} {...movie} />
         ))}
       </div>
     </div>

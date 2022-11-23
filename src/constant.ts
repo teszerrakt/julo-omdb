@@ -17,3 +17,7 @@ const breakpoints = [576, 768, 992, 1200, 1800]
  * MQ[4]: min-width 1800px
  */
 export const MQ = breakpoints.map((bp) => `@media (min-width: ${bp}px)`)
+
+const DEFAULT_SKELETON_CARD_NUMBER = 6
+export const skeletonList = (num = DEFAULT_SKELETON_CARD_NUMBER) =>
+  Array.from(Array(num).keys())
