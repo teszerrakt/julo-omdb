@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from 'axios'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useState } from 'react'
 
 interface UseAxiosReturnType<T> {
   loading: boolean
@@ -37,6 +37,7 @@ export const useAxios = <ResponseData>(
   useEffect(() => {
     if (loadOnStart && config) sendRequest(config)
     else setLoading(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loadOnStart])
 
   return { loading, data, error, refetch }
