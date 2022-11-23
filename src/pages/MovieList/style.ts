@@ -12,9 +12,13 @@ export const cssMovieListContainer = css({
 })
 
 export const cssSearchBarContainer = css({
-  padding: 32,
+  position: 'relative',
+  margin: '32px 32px 16px 32px',
+  padding: 16,
   display: 'flex',
   backgroundColor: COLOR.grayBlue,
+  border: `solid 1px ${COLOR.blue}`,
+  borderRadius: 16,
   input: {
     padding: 12,
     borderRadius: 999,
@@ -24,6 +28,12 @@ export const cssSearchBarContainer = css({
     outline: 'none',
     width: '100%',
   },
+})
+
+export const cssSearchIcon = css({
+  position: 'absolute',
+  top: '37.5%',
+  right: 37.5,
 })
 
 export const cssContentContainer = css({

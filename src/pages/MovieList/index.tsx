@@ -5,6 +5,7 @@ import {
   cssMovieListContainer,
   cssSearchBarContainer,
   cssContentContainer,
+  cssSearchIcon,
 } from './style'
 import useDebounce from '../../hooks/useDebounce'
 import { useAxios } from '../../hooks/useAxios'
@@ -66,6 +67,7 @@ const MovieList = () => {
   return (
     <>
       <div css={cssSearchBarContainer}>
+        <span css={cssSearchIcon}>🔍</span>
         <input value={query} onChange={handleQueryChange} />
       </div>
       <div css={cssContentContainer}>{renderContent()}</div>

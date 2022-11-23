@@ -9,7 +9,7 @@ function App() {
     <div>
       <Router>
         <Navigation />
-        <div style={{ marginBottom: 80 }}>
+        <div style={{ marginBottom: 32 * 4 }}>
           <Routes>
             <Route element={<MovieList />} path="/" />
             <Route element={<MovieDetail />} path="/movie/:id" />
