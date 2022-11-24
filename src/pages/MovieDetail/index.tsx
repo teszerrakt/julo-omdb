@@ -7,6 +7,7 @@ import { useAxios } from '../../hooks/useAxios'
 import useLocalStorage, { LS_KEY } from '../../hooks/useLocalStorage'
 import { Collections, MovieDetailResponse } from '../../types'
 import { capitalize } from '../../utils'
+import Error from '../../components/Error'
 import {
   cssCollectionBtn,
   cssContentContainer,
@@ -85,7 +86,7 @@ const MovieDetail = () => {
     )
   }
 
-  if (error || !data) return <div>{error || 'Some Error Happenend'}</div>
+  if (error || !data) return <Error message={error} />
 
   const isInCollection = Boolean(collections[id!])
 

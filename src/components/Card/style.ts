@@ -2,6 +2,7 @@ import { COLOR, MQ } from './../../constant'
 import { css } from '@emotion/react'
 
 export const cssCard = css({
+  height: 'fit-content',
   backgroundColor: COLOR.grayBlue,
   border: `solid 1px ${COLOR.blue}`,
   borderRadius: 16,

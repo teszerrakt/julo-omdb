@@ -17,6 +17,8 @@ import { BASE_URL } from '../../api'
 import PaginationProvider, {
   PaginationContext,
 } from '../../context/PaginationContext'
+import Error from '../../components/Error'
+import Empty from '../../components/EmptyState'
 
 const MovieList = () => {
   const [query, setQuery] = useState('Avengers')
@@ -51,11 +53,11 @@ const MovieList = () => {
     }
 
     if (movieList.length === 0) {
-      return <div>Empty State</div>
+      return <Empty message="Movie Not Found :(" />
     }
 
     if (error) {
-      return <div>{error}</div>
+      return <Error message={error} />
     }
 
     return (

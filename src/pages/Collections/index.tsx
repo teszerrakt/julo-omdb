@@ -1,5 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import Card from '../../components/Card'
+import Empty from '../../components/EmptyState'
 import useLocalStorage, { LS_KEY } from '../../hooks/useLocalStorage'
 import { Collections } from '../../types'
 import { cssMovieListContainer } from '../MovieList/style'
@@ -10,6 +11,9 @@ const CollectionsPage = () => {
   const movieList = Object.keys(collections).map(
     (movieId) => collections[movieId]
   )
+
+  if (movieList.length === 0)
+    return <Empty message="Your Collection is Empty" />
 
   return (
     <div css={cssCollectionsPage}>

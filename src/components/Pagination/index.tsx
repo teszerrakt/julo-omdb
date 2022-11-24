@@ -1,5 +1,5 @@
 /** @jsxImportSource @emotion/react */
-import { useContext, useEffect } from 'react'
+import { useContext } from 'react'
 import { PaginationContext } from '../../context/PaginationContext'
 import { cssPaginationContainer } from './style'
 
