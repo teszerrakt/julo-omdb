@@ -1,94 +1,40 @@
 /** @jsxImportSource @emotion/react */
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
-import { SearchResponse } from '../../types'
+import { CakeList } from '../../types'
 import {
   cssMovieListContainer,
-  cssSearchBarContainer,
   cssContentContainer,
-  cssSearchIcon,
 } from './style'
-import useDebounce from '../../hooks/useDebounce'
 import { useAxios } from '../../hooks/useAxios'
-import Card from '../../components/Card'
-import Pagination from '../../components/Pagination'
-import CardSkeleton from '../../components/Card/CardSkeleton'
-import { skeletonList } from '../../constant'
 import { BASE_URL } from '../../api'
-import PaginationProvider, {
-  PaginationContext,
-} from '../../context/PaginationContext'
-import Error from '../../components/Error'
+import { jsx } from '@emotion/react'
 import Empty from '../../components/EmptyState'
+import Card from '../../components/Card'
 
 const MovieList = () => {
-  const [query, setQuery] = useState('Avengers')
-  const debouncedQuery = useDebounce(query)
-  const { data, error, loading, refetch } = useAxios<SearchResponse>()
-  const { currentPage, resetPagination } = useContext(PaginationContext)
-
-  const movieList = data?.Search ?? []
+  const { data, error, loading, refetch } = useAxios<any>()
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     refetch({
       method: 'GET',
-      url: `${BASE_URL}&s=${debouncedQuery}&page=${currentPage}`,
+      url: `${BASE_URL}/cakes?${page}`,
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [debouncedQuery, currentPage])
+  }, [page])
 
-  const handleQueryChange = (event: ChangeEvent<HTMLInputElement>) => {
-    resetPagination()
-    setQuery(event.target.value)
-  }
-
-  const renderContent = () => {
-    if (loading) {
-      return (
-        <div css={cssMovieListContainer}>
-          {skeletonList().map((key) => (
-            <CardSkeleton key={key} />
-          ))}
-        </div>
-      )
-    }
-
-    if (movieList.length === 0) {
-      return <Empty message="Movie Not Found :(" />
-    }
-
-    if (error) {
-      return <Error message={error} />
-    }
-
+  if (data !== undefined && data.data.items.length !== 0) {
+    const cakeList = data.data.items as any[]
     return (
-      <>
+      <div css={cssContentContainer}>
         <div css={cssMovieListContainer}>
-          {movieList.map((movie) => (
-            <Card key={movie.imdbID} {...movie} />
-          ))}
+        {cakeList.map(cake => (
+          <Card key={cake.id} {...cake}/>
+        ))}
         </div>
-        <Pagination totalData={parseInt(data?.totalResults ?? '0')} />
-      </>
-    )
-  }
-
-  return (
-    <>
-      <div css={cssSearchBarContainer}>
-        <span css={cssSearchIcon}>🔍</span>
-        <input value={query} onChange={handleQueryChange} />
       </div>
-      <div css={cssContentContainer}>{renderContent()}</div>
-    </>
-  )
+    )
+  } else return null
 }
 
-const MovieListWrapper = () => {
-  return (
-    <PaginationProvider>
-      <MovieList />
-    </PaginationProvider>
-  )
-}
-
-export default MovieListWrapper
+export default MovieList

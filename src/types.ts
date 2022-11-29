@@ -48,3 +48,21 @@ export interface MovieDetailResponse {
 export interface Collections {
   [movieId: string]: MovieDetailResponse
 }
+
+interface ResponseWrapper<Data> {
+  status: string
+  message: string
+  data: Data
+}
+
+export interface Cake {
+  id: number
+  title: string
+  description: string
+  rating: number
+  image: string
+  created_at: string
+  updated_at: string
+}
+
+export type CakeList = ResponseWrapper<Cake[]>

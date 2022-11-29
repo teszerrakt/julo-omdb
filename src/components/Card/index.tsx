@@ -1,26 +1,26 @@
 /** @jsxImportSource @emotion/react */
 import { useNavigate } from 'react-router-dom'
-import { SearchItem } from '../../types'
+import { Cake, SearchItem } from '../../types'
 import { capitalize } from '../../utils'
 import { cssCard, cssCardDetailContainer, cssImgContainer } from './style'
 import Image from '../../components/Image'
 
-const Card = ({ Poster, Type, Year, Title, imdbID }: SearchItem) => {
+const Card = ({ id, image, description, rating, title }: Cake) => {
   const navigate = useNavigate()
 
-  const handleClick = () => {
-    navigate(`/movie/${imdbID}`)
-  }
+  // const handleClick = () => {
+  //   navigate(`/cakes/${id}`)
+  // }
 
   return (
-    <div css={cssCard} onClick={handleClick}>
+    <div css={cssCard}>
       <div css={cssImgContainer}>
-        <Image src={Poster} alt={`${Title} poster`} />
+        <Image src={image} alt={`${title} poster`} />
       </div>
       <div css={cssCardDetailContainer}>
-        <h2>{Title}</h2>
+        <h2>{<title></title>}</h2>
         <div>
-          {capitalize(Type)} | {Year}
+          {rating}
         </div>
       </div>
     </div>
